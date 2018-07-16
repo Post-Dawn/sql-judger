@@ -1,2 +1,2 @@
-# SQL-judger
+# sql-judger
 
