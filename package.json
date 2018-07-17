@@ -1,18 +1,21 @@
 {
-    "name": "sql-judger",
-    "version": "0.0.1",
-    "author": "tigertang",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/tigert1998/sql-judger.git"
-    },
-    "dependencies": {
-        "express": "latest"
-    },
-    "config": {
-        "port": "8080"
-    },
-    "scripts": {
-        "start": "node sources/backend/server.js"
-    }
+  "name": "sql-judger",
+  "version": "0.0.1",
+  "author": "tigertang",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tigert1998/sql-judger.git"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "connect-multiparty": "^2.1.1",
+    "express": "latest",
+    "marked": "^0.4.0"
+  },
+  "config": {
+    "port": "8080"
+  },
+  "scripts": {
+    "start": "node sources/backend/server.js"
+  }
 }

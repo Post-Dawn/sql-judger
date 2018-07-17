@@ -1,0 +1,31 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <p id="description"></p>
+    <form method="post" id="form" action="/submitCode" enctype="multipart/form-data">
+        <input type="submit" value="submit">
+    </form>
+    <textarea form="form" name="code" cols="100" rows="40"></textarea>
+    <script src="/marked.js"></script>
+    <script>
+        marked.setOptions({
+            renderer: new marked.Renderer(),
+            gfm: true,
+            tables: true,
+            breaks: true,
+            pedantic: true,
+            sanitize: true,
+            smartLists: true,
+            smartypants: true
+        });
+        let element = document.getElementById("description");
+        let content = element.innerHTML;
+        console.log(content);
+        element.innerHTML = marked(content);
+    </script>
+</body>
+
+</html>

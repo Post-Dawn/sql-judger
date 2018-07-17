@@ -3,7 +3,29 @@
 <head></head>
 
 <body>
-    <h1>Hello World!</h1>
+    <h1>sql judger</h1>
+    <ul></ul>
+    <script>
+        let ul = document.getElementsByTagName("ul")[0];
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = () => {
+            if (request.readyState == 4) {
+                if (request.status == 200) {
+                    let json = JSON.parse(request.response);
+                    for (let i = 0; i < json.length; i++) {
+                        let element = document.createElement("li");
+                        element.onclick = () => {
+                            window.open("/display.html?problem=" + json[i]);
+                        };
+                        element.innerText = json[i];
+                        ul.appendChild(element);
+                    }
+                }
+            }
+        };
+        request.open("get", "/archive", true);
+        request.send();
+    </script>
 </body>
 
 </html>
