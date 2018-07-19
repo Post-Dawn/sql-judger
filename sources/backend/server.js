@@ -51,7 +51,7 @@ app.get(/display.html/, (request, response) => {
 
 app.get(/.*\.html/, (request, response) => {
     response.type("html");
-    fs.readFile(frontendPath + request.url, {}, (error, data) => {
+    fs.readFile(path.join(frontendPath, request.url), {}, (error, data) => {
         if (error) {
             response.send(error);
         } else {
@@ -64,8 +64,23 @@ app.get(/.*\.html/, (request, response) => {
 app.get(/archive/, (request, response) => {
     response.type("json");
     fs.readdir(archivePath, (error, data) => {
-        response.send(data);
-        response.end();
+        let promises = [];
+        data.forEach((item) => {
+            promises.push(new Promise((resolve, reject) => {
+                let stat = fs.lstat(path.join(archivePath, item), (error, stats) => {
+                    if (error) reject(error);
+                    else resolve(stats);
+                });
+            }));
+        });
+        Promise.all(promises).then((values) => {
+            let result = [];
+            for (let i = 0; i < data.length; i++) {
+                if (values[i].isDirectory()) result.push(data[i]);
+            }
+            response.send(result);
+            response.end();
+        });
     });
 });
 
