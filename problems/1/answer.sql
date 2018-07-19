@@ -5,4 +5,5 @@ case
     when A = B or B = C or A = C then "Isosceles"
     else "Scalene"
 end
-from TRIANGLES;
+from TRIANGLES
+into outfile 'D://github/sql-judger/problems/1/triangles.sql';
